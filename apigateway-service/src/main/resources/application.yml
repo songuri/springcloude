@@ -9,7 +9,7 @@ eureka:
 spring:
   application:
     name: apigateway-service
- #Java Code? ??? ????. (FilterConfig)
+ #Java Code로 구현 가능함.. (FilterConfig)
   cloud:
     gateway:
       default-filters:
@@ -21,8 +21,8 @@ spring:
       routes:
         - id: first-service
 #          uri: http://localhost:8081/
-          uri: lb://MY-FIRST-SERVICE # ???? ????? ???
-          predicates: #?????? ????
+          uri: lb://MY-FIRST-SERVICE # 디스커버리서비스에 등록되어진 이름.
+          predicates: #조건문 같은거
             - Path=/first-service/**
           filters:
             - CustomFilter
@@ -34,7 +34,7 @@ spring:
           predicates:
             - Path=/second-service/**
           filters:
-            - name: CustomFilter  #???? agrs? ??? name ??? ????? ????? name ?? ???.
+            - name: CustomFilter  #agrs가 없으면 name 생략 가능
             - name: LoggingFilter
               args:
                 baseMessage: Hi there.
